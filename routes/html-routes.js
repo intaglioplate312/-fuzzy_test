@@ -4,39 +4,33 @@ var cheerio = require('cheerio');
 var request = require('request');
 var Article = require('../models/Articles.js');
 // A GET request to scrape the echojs website
+
 app.get("/scrape", function(req, res) {
     // First, we grab the body of the html with request
-    request("http://www.echojs.com/", function(error, response, html) {
-        // Then, we load that into cheerio and save it to $ for a shorthand selector
-        var $ = cheerio.load(html);
-        // Now, we grab every h2 within an article tag, and do the following:
-        $("article h2").each(function(i, element) {
+    app.get("/", function(req, res) {
+        // First, we grab the body of the html with request
+        request("https://arstechnica.com/", function(error, response, html) {
+            // Then, we load that into cheerio and save it to $ for a shorthand selector
+            var $ = cheerio.load(html);
 
-            // Save an empty result object
-            var result = {};
+            var articleArr = [];
 
-            // Add the text and href of every link, and save them as properties of the result object
-            result.title = $(this).children("a").text();
-            result.link = $(this).children("a").attr("href");
-            console.log(result);
-            // Using our Article model, create a new entry
-            // This effectively passes the result object to the entry (and the title and link)
-            var entry = new Article(result);
+            $("header").each(function(i, element) {
 
-            // Now, save that entry to the db
-            entry.save(function(err, doc) {
-                // Log any errors
-                if (err) {
-                    console.log(err);
+                // Save an empty result object
+                var result = {};
+                // Add the text and href of every link, and save them as properties of the result object
+                result.link = $(element).children("h2").children("a").attr("href");
+                result.title = $(element).children("h2").text();
+                result.summary = $(element).children("p.excerpt").text();
+
+                if (result.link !== undefined) {
+
+                    articleArr.push({ title: result.title, link: result.link, summary: result.summary });
                 }
-                // Or log the doc
-                else {
-                    console.log(doc);
-                }
+
             });
-
+            res.render("index", { articles: articleArr });
         });
     });
-    // Tell the browser that we finished scraping the text
-    res.send("Scrape Complete");
 });
