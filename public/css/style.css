@@ -1,0 +1,32 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-style: 1em;
+}
+
+.remLeftPad {
+    padding-left: 0 !important;
+}
+
+.btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+#modal-Comments {
+    display: flex;
+    justify-content: space-between;
+}
+
+.article {
+    width: 100%;
+    border-bottom: 1px dotted #c6c6c6;
+}
+
+.navbar .navbar-default {
+    font-style: 1em;
+    color: magenta;
+}
+
+a.navbar-brand {
+    color: magenta;
+}

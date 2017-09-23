@@ -1,0 +1,48 @@
+{{#each savedArticles}}
+    <div data-id={{this._id}} class="article">
+        <div class="article card">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                <div data-saved-headline={{@index}} class="savedHeadline">
+                    <h2><a data-saved-link={{@index}} href="{{this.link}}" target="_blank">{{this.title}}</a></h2>
+                    <p data-saved-summary={{@index}} class="savedSummary">{{this.summary}}</p>
+                </div>
+                <div class="btn-wrapper">
+                  <!-- render a Comments button -->
+                  <button type="button" data-article-id={{this._id}} data-toggle="modal" data-target="#CommentModal" data-saved-index={{@index}} class="Comments btn btn-primary">Add/View Comments</button>
+                  
+                  <!-- render a remove button -->
+                  <button type="button" data-article-id={{this._id}} data-remove-index={{@index}} class="remove btn btn-danger">Delete</button>
+                </div>  
+            </div><!-- end article column -->
+        </div><!-- /end card -->
+    </div><!-- /end article -->
+{{/each}}
+
+<!-- Modal -->
+<div id="CommentModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Article Comments</h4>
+      </div>
+      <div class="modal-body">
+        <span id="modal-Comments"></span>
+        
+            <div id="Comment-form" class="form-group">
+                <label for="CommentText">Enter New Comment</label>
+                <textarea class="form-control" name="bodyinput" id="bodyinput" rows="3"></textarea>
+                {{!-- <input name="articleId" id="articleId" type="hidden"/> --}}
+                <button type="submit" id="articleId" class="Commentbtn btn btn-primary" data-dismiss="modal">Submit</button>
+            </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" id="saveComment" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -12,14 +12,16 @@ var ArticleSchema = new Schema({
     },
     // link is a required string
     link: {
-        type: String,
-        required: true
+        type: String
     },
-    // This only saves one note's ObjectId, ref refers to the Note model
-    note: {
+    summary: {
+        type: String
+    },
+    // This only saves one Comment's ObjectId, ref refers to the Comment model
+    Comment: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
-    }
+    }]
 });
 
 // Create the Article model with the ArticleSchema
