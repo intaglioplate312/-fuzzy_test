@@ -1,7 +1,7 @@
 //required
 var cheerio = require("cheerio");
-// for getting HTML from URLs
 var request = require("request");
+
 var Article = require("../models/Article.js");
 
 module.exports = function(app) {
