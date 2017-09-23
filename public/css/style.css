@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
 body {
     font-family: 'Libre Barcode 39 Text', cursive, sans-serif;
 }
@@ -20,4 +19,8 @@ body {
 .article {
     width: 100%;
     border-bottom: 1px dotted #c6c6c6;
+}
+
+.navbar-brand {
+    font-size: 4rem;
 }

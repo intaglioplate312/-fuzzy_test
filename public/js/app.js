@@ -1,3 +1,7 @@
+function articleCount(obj) {
+    return obj.length;
+};
+
 $(document).ready(function() {
 
     // add click listeners to save buttons
@@ -22,6 +26,9 @@ $(document).ready(function() {
 
                 if (success.message) {}
             };
+
+        // now remove article from index page
+        // $(".article[data-index='"+ index +"']").slideUp("slow");  
     })
 
     // add click listener to remove button; we're not handling this entirely in back end because we want a nice slide-up action
@@ -50,8 +57,13 @@ $(document).ready(function() {
             .done(function(data) {
                 // console.log(data);
 
+
             });
     });
+
+
+
+
     // Whenever someone clicks add note button, populate modal form with any existing notes and add article id to note button
     $(document).on("click", ".notes", function() {
 
@@ -74,7 +86,7 @@ $(document).ready(function() {
                     console.log(data.note);
                     $("#modal-notes").html("");
 
-                    for (var i = 0; i < 15; i++) {
+                    for (var i = 0; i < data.note.length; i++) {
                         console.log(data.note[i].body);
 
 
@@ -109,4 +121,6 @@ $(document).ready(function() {
         // Also, remove the values entered in the input and textarea for note entry
         $("#bodyinput").val("");
     });
-});
+
+
+}); // end document ready function
