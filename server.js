@@ -1,3 +1,6 @@
+/* Showing Mongoose's "Populated" Method
+ * =============================================== */
+
 // Dependencies
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -5,7 +8,7 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const exphbs = require("express-handlebars");
 
-var Comment = require("./models/Comment.js");
+var Note = require("./models/Note.js");
 var Article = require("./models/Article.js");
 
 // Our scraping tools
@@ -35,8 +38,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 // Database configuration with mongoose
-// mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/mongoscraper" );
-mongoose.connect('mongodb://heroku_gkxrnpbx:@ds147034.mlab.com:47034/heroku_gkxrnpbx');
+// Database configuration with mongoose
+mongoose.connect("mongodb://localhost/scraper");
 var db = mongoose.connection;
 
 // Show any mongoose errors

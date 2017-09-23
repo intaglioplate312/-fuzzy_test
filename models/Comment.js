@@ -3,19 +3,19 @@ var mongoose = require("mongoose");
 // Create a schema class
 var Schema = mongoose.Schema;
 
-// Create the Comment schema
-var CommentSchema = new Schema({
+// Create the Note schema
+var NoteSchema = new Schema({
     // Just a string
     body: {
         type: String
     }
 });
 
-// Remember, Mongoose will automatically save the ObjectIds of the Comments
+// Remember, Mongoose will automatically save the ObjectIds of the Notes
 // These ids are referred to in the Article model
 
-// Create the Comment model with the CommentSchema
-var Comment = mongoose.model("Comment", CommentSchema);
+// Create the Note model with the NoteSchema
+var Note = mongoose.model("Note", NoteSchema);
 
-// Export the Comment model
-module.exports = Comment;
+// Export the Note model
+module.exports = Note;

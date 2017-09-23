@@ -30,22 +30,22 @@ $(document).ready(function() {
         })
     });
 
-    // remove Comment
-    $(document).on("click", ".delCommentbtn", function() {
+    // remove Note
+    $(document).on("click", ".delNotebtn", function() {
         var thisId = $(this).attr("value");
         $("#articleId").attr("value", $(this).attr("data-article-id"));
         // Now make an ajax call for the Article
         $.ajax({
                 method: "GET",
-                url: "/removeComment/" + thisId
+                url: "/removeNote/" + thisId
             })
-            // With that done, add the Comment information to the page
+            // With that done, add the Note information to the page
             .done(function(data) {
                 // console.log(data);
             });
     });
-    // Whenever someone clicks add Comment button, populate modal form with any existing Comments and add article id to Comment button
-    $(document).on("click", ".Comments", function() {
+    // Whenever someone clicks add Note button, populate modal form with any existing Notes and add article id to Note button
+    $(document).on("click", ".Notes", function() {
         var thisId = $(this).attr("data-article-id");
         $("#articleId").attr("value", $(this).attr("data-article-id"));
         // Now make an ajax call for the Article
@@ -53,34 +53,34 @@ $(document).ready(function() {
                 method: "GET",
                 url: "/articles/" + thisId
             })
-            // With that done, add the Comment information to the page
+            // With that done, add the Note information to the page
             .done(function(data) {
                 // console.log(data);
-                // If there's a Comment in the article
-                if (data.Comment) {
-                    console.log(data.Comment);
-                    $("#modal-Comments").html("");
-                    for (var i = 0; i < data.Comment.length; i++) {
-                        console.log(data.Comment[i].body);
+                // If there's a Note in the article
+                if (data.Note) {
+                    console.log(data.Note);
+                    $("#modal-Notes").html("");
+                    for (var i = 0; i < data.Note.length; i++) {
+                        console.log(data.Note[i].body);
 
-                        $("#modal-Comments").append(data.Comment[i].body + "&nbsp;&nbsp;&nbsp;" + "<button type=\"submit\" value=" + data.Comment[i]._id + " class=\"delCommentbtn btn btn-primary\" data-dismiss=\"modal\">x</button><hr />");
+                        $("#modal-Notes").append(data.Note[i].body + "&nbsp;&nbsp;&nbsp;" + "<button type=\"submit\" value=" + data.Note[i]._id + " class=\"delNotebtn btn btn-primary\" data-dismiss=\"modal\">x</button><hr />");
                     }
                 }
             });
     });
 
-    // When you click the saveComment button
-    $(document).on("click", ".Commentbtn", function() {
+    // When you click the saveNote button
+    $(document).on("click", ".Notebtn", function() {
         // Grab the id associated with the article from the submit button
         var thisId = $(this).attr("value");
-        var saveComment = $("#bodyinput").val();
-        // Run a POST request to change the Comment, using what's entered in the inputs
+        var saveNote = $("#bodyinput").val();
+        // Run a POST request to change the Note, using what's entered in the inputs
         $.ajax({
                 method: "POST",
                 url: "/articles/" + thisId,
                 data: {
-                    // Value taken from Comment textarea
-                    body: saveComment
+                    // Value taken from Note textarea
+                    body: saveNote
                 }
             })
             // With that done
@@ -88,7 +88,7 @@ $(document).ready(function() {
                 // Log the response
                 console.log(data);
             });
-        // Also, remove the values entered in the input and textarea for Comment entry
+        // Also, remove the values entered in the input and textarea for Note entry
         $("#bodyinput").val("");
     });
 });

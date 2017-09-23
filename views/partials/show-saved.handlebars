@@ -7,8 +7,8 @@
                     <p data-saved-summary={{@index}} class="savedSummary">{{this.summary}}</p>
                 </div>
                 <div class="btn-wrapper">
-                  <!-- render a Comments button -->
-                  <button type="button" data-article-id={{this._id}} data-toggle="modal" data-target="#CommentModal" data-saved-index={{@index}} class="Comments btn btn-primary">Add/View Comments</button>
+                  <!-- render a Notes button -->
+                  <button type="button" data-article-id={{this._id}} data-toggle="modal" data-target="#NoteModal" data-saved-index={{@index}} class="Notes btn btn-primary">Add/View Notes</button>
                   
                   <!-- render a remove button -->
                   <button type="button" data-article-id={{this._id}} data-remove-index={{@index}} class="remove btn btn-danger">Delete</button>
@@ -19,28 +19,28 @@
 {{/each}}
 
 <!-- Modal -->
-<div id="CommentModal" class="modal fade" role="dialog">
+<div id="NoteModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Article Comments</h4>
+        <h4 class="modal-title">Article Notes</h4>
       </div>
       <div class="modal-body">
-        <span id="modal-Comments"></span>
+        <span id="modal-Notes"></span>
         
-            <div id="Comment-form" class="form-group">
-                <label for="CommentText">Enter New Comment</label>
+            <div id="Note-form" class="form-group">
+                <label for="NoteText">Enter New Note</label>
                 <textarea class="form-control" name="bodyinput" id="bodyinput" rows="3"></textarea>
                 {{!-- <input name="articleId" id="articleId" type="hidden"/> --}}
-                <button type="submit" id="articleId" class="Commentbtn btn btn-primary" data-dismiss="modal">Submit</button>
+                <button type="submit" id="articleId" class="Notebtn btn btn-primary" data-dismiss="modal">Submit</button>
             </div>
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="saveComment" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" id="saveNote" data-dismiss="modal">Close</button>
       </div>
     </div>
 

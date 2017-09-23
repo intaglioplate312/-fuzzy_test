@@ -1,7 +1,7 @@
    // Routes
    // ======
-   // Requiring our Comment and Article models
-   var Comment = require("../models/Comment.js");
+   // Requiring our Note and Article models
+   var Note = require("../models/Note.js");
    var Article = require("../models/Article.js");
 
    module.exports = function(app) {
@@ -54,8 +54,8 @@
        app.get("/articles/:id", function(req, res) {
            // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
            Article.findOne({ "_id": req.params.id })
-               // ..and populate all of the Comments associated with it
-               .populate("Comment")
+               // ..and populate all of the Notes associated with it
+               .populate("Note")
                // now, execute our query
                .exec(function(error, doc) {
                    // Log any errors
@@ -69,24 +69,24 @@
                });
        });
 
-       // Create a new Comment or replace an existing Comment
+       // Create a new Note or replace an existing Note
        app.post("/articles/:id", function(req, res) {
-           // Create a new Comment and pass the req.body to the entry
-           var newComment = new Comment(req.body);
-           console.log("new Comment" + newComment);
+           // Create a new Note and pass the req.body to the entry
+           var newNote = new Note(req.body);
+           console.log("new Note" + newNote);
 
-           // And save the new Comment to the db
-           newComment.save(function(error, doc) {
+           // And save the new Note to the db
+           newNote.save(function(error, doc) {
                // Log any errors
                if (error) {
                    console.log(error);
                }
                // Otherwise
                else {
-                   // Use the article id to find it's Comments
+                   // Use the article id to find it's Notes
 
-                   Article.findOneAndUpdate({ '_id': req.params.id }, { $push: { 'Comment': doc._id } }, { new: true, upsert: true })
-                       .populate('Comment')
+                   Article.findOneAndUpdate({ '_id': req.params.id }, { $push: { 'Note': doc._id } }, { new: true, upsert: true })
+                       .populate('Note')
 
                    // Execute the above query
                    .exec(function(err, doc) {
@@ -102,10 +102,10 @@
            });
        });
 
-       // remove Comment
-       app.get("/removeComment/:id", function(req, res) {
+       // remove Note
+       app.get("/removeNote/:id", function(req, res) {
 
-           Comment.remove({
+           Note.remove({
                "_id": req.params.id
            }, function(error, removed) {
                // Log any errors from mongojs
@@ -118,7 +118,7 @@
                else {
                    console.log(removed);
 
-                   Article.update({}, { $pull: { Comment: { $in: [req.params.id] } } })
+                   Article.update({}, { $pull: { Note: { $in: [req.params.id] } } })
 
                    // Execute the above query
                    .exec(function(err, doc) {
